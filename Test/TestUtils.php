@@ -37,7 +37,18 @@ class TestUtils {
         $path = realpath($keystorePath);
         $keystore = array();
         $pkcs12 = file_get_contents($path);
+        
+        // Read the p12 file
         trim(openssl_pkcs12_read( $pkcs12, $keystore, $keystorePassword));
-        return  $keystore['pkey'];
+        
+        // Return private key
+        if(is_array($keystore) && isset($keystore['pkey']) && !empty($keystore['pkey']))
+        {
+            return  $keystore['pkey'];
+        }
+        else
+        {
+            throw new \Exception('Missing private key');
+        }
     }
 }
