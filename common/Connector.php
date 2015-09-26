@@ -166,7 +166,7 @@ class Connector
 			$params[Connector::OAUTH_BODY_HASH] = $this->generateBodyHash($body);
 		}
 		try{
-			return $this->connect($params,$this->realm,$url,$requestMethod,$body);
+			return $this->connect($params,self::REALM,$url,$requestMethod,$body);
 		}catch (Exception $e) {
 			throw $this->checkForErrors($e);
 		}
